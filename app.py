@@ -18,7 +18,6 @@ stores = [
 def home():
     return render_template('index.html')
     
-
 @app.route('/store', methods=['POST'])
 def create_store():
     request_data = request.get_json()
@@ -49,13 +48,11 @@ def create_item_in_store(name):
                 'name': request_data['name'],
                 'price': request_data['price']
             }
-            store['item'].append(new_item)
+            store['items'].append(new_item)
             return jsonify(new_item)
     return jsonify({'message': 'store not found'})
     
-
-
-@app.route('/store/ <string:name>/item')
+@app.route('/store/<string:name>/item')
 def get_items_in_store(name):
     for store in stores:
         if store['name'] == name:
